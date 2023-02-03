@@ -33,7 +33,7 @@ func processSequential(d string) {
 	_ = os.Mkdir(d+"/png", 0777)
 
 	entries := must(os.ReadDir(d))
-	fmt.Println("Processing", len(entries), "sequentially")
+	//fmt.Println("Processing", len(entries), "sequentially")
 	for _, entry := range entries {
 		if entry.IsDir() {
 			continue
@@ -42,12 +42,12 @@ func processSequential(d string) {
 			continue
 		}
 		src := d + "/" + entry.Name()
-		fmt.Println("Decoding", src)
+		//fmt.Println("Decoding", src)
 		dest := d + "/png/" + entry.Name() + ".png"
 		convertJpgFileToPngFile(src, dest)
-		// fmt.Println(dest)
+		// //fmt.Println(dest)
 	}
-	fmt.Println("All done.")
+	//fmt.Println("All done.")
 }
 
 func processConcurrent(d string) {
@@ -55,7 +55,7 @@ func processConcurrent(d string) {
 
 	var wg sync.WaitGroup
 	entries := must(os.ReadDir(d))
-	fmt.Println("Processing", len(entries), "concurrently")
+	//fmt.Println("Processing", len(entries), "concurrently")
 	for _, entry := range entries {
 		if entry.IsDir() {
 			continue
@@ -68,13 +68,13 @@ func processConcurrent(d string) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			fmt.Println("Decoding", src)
+			//fmt.Println("Decoding wtf", src)
 			convertJpgFileToPngFile(src, dest)
-			// fmt.Println("Wrote", dest)
+			// //fmt.Println("Wrote", dest)
 		}()
 	}
 	wg.Wait()
-	fmt.Println("All done.")
+	//fmt.Println("All done.")
 }
 
 func convertJpgFileToPngFile(src, dest string) {

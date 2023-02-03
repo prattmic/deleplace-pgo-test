@@ -6,6 +6,8 @@ import "testing"
 //	main()
 //}
 
-func TestProcess(t *testing.T) {
-	main()
+func BenchmarkProcess(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		main()
+	}
 }
